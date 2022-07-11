@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zrzyfw.myspringboot.modules.system.dao.SysUserDao">
+
+    <sql id="baseUserSql">
+        id,
+        created,
+        gmt_create,
+        modified,
+        gmt_modified,
+        del_flag,
+        remarks,
+        username,
+        name,
+        password,
+        dept_id,
+        email,
+        mobile,
+        gender,
+        avatar,
+        lock_flag,
+        role_belong,
+        work_time,
+        duty,
+        duty_sign,
+        audit_sign,
+        mobile_code,
+        psd
+    </sql>
+
+    <resultMap id="userVoMap" type="com.zrzyfw.myspringboot.modules.system.entity.SysUser">
+        <id column="id" property="id"/>
+        <result column="created" property="created"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="modified" property="modified"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="remarks" property="remarks"/>
+        <result column="username" property="username"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="gender" property="gender"/>
+        <result column="avatar" property="avatar"/>
+        <result column="lock_flag" property="lockFlag"/>
+        <result column="work_time" property="workTime"/>
+        <result column="duty" property="duty"/>
+        <result column="duty_sign" property="dutySign"/>
+        <result column="audit_sign" property="auditSign"/>
+        <result column="mobile_code" property="mobileCode"/>
+        <result column="psd" property="psd"/>
+        <result column="url" property="url"/>
+        <result column="head_url" property="headUrl"/>
+        <result column="off_flag" property="offFlag"/>
+    </resultMap>
+
+    <select id="findUserByName" resultMap="userVoMap">
+        select
+        <include refid="baseUserSql" />
+        from sys_user where del_flag = 0 and name like concat('%', #{name} , '%')
+    </select>
+
+</mapper>
